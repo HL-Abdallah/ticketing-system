@@ -1,4 +1,4 @@
-package com.hameurlain.tsapi.globalAdvice.helperClasses;
+package com.hameurlain.tsapi.globalAdvice.ErrorResponsePOJO;
 
 import lombok.Data;
 
