@@ -1,17 +1,17 @@
 package com.hameurlain.tsapi.globalAdvice;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.hameurlain.tsapi.globalAdvice.helperClasses.ValidationErrorResponse;
-import com.hameurlain.tsapi.globalAdvice.helperClasses.Violation;
+import com.hameurlain.tsapi.globalAdvice.ErrorResponsePOJO.ErrorResponse;
+import com.hameurlain.tsapi.globalAdvice.ErrorResponsePOJO.ValidationErrorResponse;
+import com.hameurlain.tsapi.globalAdvice.ErrorResponsePOJO.Violation;
 
 /**
  * @author Abdallah hameurlain.abdallah@gmail.com
@@ -39,9 +39,14 @@ public class ErrorHandlerControllerAdvice {
 		for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
 			error.getValidation_errors().add(new Violation(fieldError.getField(), fieldError.getDefaultMessage()));
 		}
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		return new ResponseEntity<ValidationErrorResponse>(error, headers, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ValidationErrorResponse>(error, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(BadCredentialsException.class)
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	ResponseEntity<ErrorResponse> onBadCredentials(Exception e) {
+		var error = new ErrorResponse(HttpStatus.UNAUTHORIZED,e);
+		return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
 	}
 
 }
