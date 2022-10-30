@@ -1,4 +1,4 @@
-package com.hameurlain.tsapi.config.security.services;
+package com.hameurlain.tsapi.security.services;
 
 import java.util.Collection;
 import java.util.List;
