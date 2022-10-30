@@ -4,20 +4,22 @@ import {
   Avatar,
   Menu,
   MenuItem,
-    Divider,
-  Button
+  Divider,
+  Button,
 } from "@mui/material";
 import { useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatIcon from "@mui/icons-material/Chat";
 import LogoutIcon from "@mui/icons-material/Logout";
 import profile from "../assets/profile.jpg";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ProfileOptions = () => {
   // state
   const [anchorEl, setAnchorEl] = useState(null);
   const PROFILE_MENU_OPEN = Boolean(anchorEl);
   // handlers
+  const navigate = useNavigate();
   const handleProfileOpen = (e: any) => {
     setAnchorEl(e.currentTarget);
   };
@@ -53,8 +55,15 @@ const ProfileOptions = () => {
         <MenuItem>View Profile</MenuItem>
         <Divider />
         <MenuItem>
-          {/* <FormControlLabel control={<Switch defaultChecked />} label="Switch Theme" /> */}
-          <Button color="error" endIcon={<LogoutIcon/>} variant={"contained"}> 
+          <Button
+            color="error"
+            endIcon={<LogoutIcon />}
+            variant={"contained"}
+            onClick={() => {
+              /* TODO : implement logout logic */
+              navigate("/");
+            }}
+          >
             Logout
           </Button>
         </MenuItem>

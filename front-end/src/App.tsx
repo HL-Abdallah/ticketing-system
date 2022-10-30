@@ -11,6 +11,8 @@ import TicketsPage from "./routes/App/Tickets/TicketsPage";
 import SettingsPage from "./routes/App/Settings/SettingsPage";
 import UsersPage from "./routes/App/Users/UsersPage";
 import NewTicket from "./routes/App/Tickets/NewTicket";
+import Login from "./routes/Login/Login";
+import Register from "./routes/Register/Register";
 
 const App = () => {
   const [theme, setTheme] = useState(light);
@@ -21,6 +23,8 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" index element={<LandingPage />} />
+          <Route path="/login" index element={<Login />} />
+          <Route path="/register" index element={<Register />} />
           <Route path="/app" element={<AppLayout />}>
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="users" element={<UsersPage />} />
