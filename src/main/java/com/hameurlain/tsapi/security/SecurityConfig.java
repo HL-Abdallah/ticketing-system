@@ -1,4 +1,4 @@
-package com.hameurlain.tsapi.config.security;
+package com.hameurlain.tsapi.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
