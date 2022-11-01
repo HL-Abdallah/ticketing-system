@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import {
   AppBar,
@@ -21,12 +21,12 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import styles from "./AppLayout.module.css";
-import logo from "../../assets/ticket-logo.jpg";
+import logo from "../../assets/ticket-logo.png";
 import ProfileOptions from "../../components/ProfileOptions";
 
-const AppLayout = () => {
+const AppLayout: React.FC<any> = ({ isLightMode }) => {
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [isLightTheme, setIsLightTheme] = useState(true);
+
   const drawerWidth = 320;
   const handleMenuToggle = () => {
     setDrawerOpen((prev) => !prev);
@@ -58,7 +58,7 @@ const AppLayout = () => {
               </div>
             </div>
             <div className={styles.right}>
-              <ProfileOptions />
+              <ProfileOptions isLightMode={isLightMode} />
             </div>
           </div>
         </Toolbar>

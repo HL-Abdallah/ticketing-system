@@ -12,12 +12,16 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatIcon from "@mui/icons-material/Chat";
 import LogoutIcon from "@mui/icons-material/Logout";
 import profile from "../assets/profile.jpg";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
-const ProfileOptions = () => {
+const ProfileOptions: React.FC<any> = ({ isLightMode }) => {
   // state
   const [anchorEl, setAnchorEl] = useState(null);
   const PROFILE_MENU_OPEN = Boolean(anchorEl);
+  const theme = useTheme();
   // handlers
   const navigate = useNavigate();
   const handleProfileOpen = (e: any) => {
@@ -29,6 +33,15 @@ const ProfileOptions = () => {
 
   return (
     <>
+      <Tooltip title="Theme">
+        <IconButton onClick={() => isLightMode((prev: boolean) => !prev)}>
+          {theme.palette.mode === "light" ? (
+            <LightModeIcon />
+          ) : (
+            <DarkModeIcon />
+          )}
+        </IconButton>
+      </Tooltip>
       <Tooltip title="Notifications">
         <IconButton>
           <NotificationsIcon />

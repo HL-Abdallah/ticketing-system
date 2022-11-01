@@ -15,17 +15,20 @@ import Login from "./routes/Login/Login";
 import Register from "./routes/Register/Register";
 
 const App = () => {
-  const [theme, setTheme] = useState(light);
+  const [isLightTheme, setIsLightTheme] = useState(true);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isLightTheme ? light : dark}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
           <Route path="/" index element={<LandingPage />} />
           <Route path="/login" index element={<Login />} />
           <Route path="/register" index element={<Register />} />
-          <Route path="/app" element={<AppLayout />}>
+          <Route
+            path="/app"
+            element={<AppLayout isLightMode={setIsLightTheme} />}
+          >
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="tickets" element={<TicketsPage />} />
